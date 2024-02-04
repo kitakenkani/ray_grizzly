@@ -1,4 +1,5 @@
 import AddToBag from '@/app/components/AddToBag'
+import CheckoutNow from '@/app/components/CheckoutNow'
 import ImageGallery from '@/app/components/ImageGallery'
 import { type fullProduct } from '@/app/interface'
 import { client } from '@/app/lib/sanity'
@@ -19,6 +20,8 @@ async function getData (slug: string): Promise<fullProduct> {
   const data = await client.fetch(query)
   return data
 }
+
+export const dynamic = 'force-dynamic'
 
 export default async function ProductPage ({ params }: { params: { slug: string } }): Promise<JSX.Element> {
   const decodedString = decodeURIComponent(params.slug)
@@ -60,7 +63,15 @@ export default async function ProductPage ({ params }: { params: { slug: string 
                           key={data._id}
                           price_id={data.price_id}
                         />
-                        <Button variant="secondary">Checkout now</Button>
+                        <CheckoutNow
+                          currency='JPY'
+                          description={data.description}
+                          image={data.images[0]}
+                          name={data.name}
+                          price={data.price}
+                          key={data._id}
+                          price_id={data.price_id}
+                        />
                     </div>
                     <p className='mt-12 text-base text-gray-500 tracking-wide'>{data.description}</p>
                 </div>

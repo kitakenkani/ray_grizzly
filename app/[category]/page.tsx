@@ -15,6 +15,8 @@ async function getData (category: string): Promise<simplifiedProduct[]> {
   return data
 }
 
+export const dynamic = 'force-dynamic'
+
 export default async function CategoryPage ({ params }: { params: { category: string } }): Promise<JSX.Element> {
   const data: simplifiedProduct[] = await getData(params.category)
   return (

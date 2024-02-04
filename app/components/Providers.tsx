@@ -14,8 +14,8 @@ export default function CartProvider ({ children }: { children: ReactNode }): JS
             mode="payment"
             cartMode="client-only"
             stripe={stripeKey}
-            successUrl="http://localhost:3000/stripe/success"
-            cancelUrl="http://localhost:3000/stripe/error"
+            successUrl="https://ray-grizzly.vercel.app/stripe/success"
+            cancelUrl="https://ray-grizzly.vercel.app/stripe/error"
             currency="JPY"
             billingAddressCollection={false}
             shouldPersist={true}
