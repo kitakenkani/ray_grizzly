@@ -3,7 +3,7 @@
 import { CartProvider as USCProvider } from '@/node_modules/use-shopping-cart'
 import { type ReactNode } from 'react'
 
-export default function CartProvider ({ children }: { children: ReactNode }) {
+export default function CartProvider ({ children }: { children: ReactNode }): JSX.Element {
   return (
         <USCProvider
             mode="payment"

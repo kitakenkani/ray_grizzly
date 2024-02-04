@@ -5,10 +5,16 @@ import { useShoppingCart } from '@/node_modules/use-shopping-cart'
 import { urlFor } from '../lib/sanity'
 import { type ProductCart } from './AddToBag'
 
-export default function CheckoutNow ({ currency, description, image, name, price, price_id }: ProductCart) {
+export default function CheckoutNow ({ currency, description, image, name, price, price_id }: ProductCart): JSX.Element {
   const { checkoutSingleItem } = useShoppingCart()
-  function buyNow(priceId: string) {
+  function buyNow (priceId: string): void {
     checkoutSingleItem(priceId)
+      .then(() => {
+        console.log('購入が成功しました。')
+      })
+      .catch((error: any) => {
+        console.error('購入中にエラーが発生しました:', error)
+      })
   }
   const product = {
     name,

@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button'
 import { CheckCheck } from '@/node_modules/lucide-react'
 import Link from '@/node_modules/next/link'
 
-export default function strinpeSuccess () {
+export default function strinpeSuccess (): JSX.Element {
   return (
         <div className="h-screen">
             <div className="mt-12 md:max-w-[50vw] mx-auto">

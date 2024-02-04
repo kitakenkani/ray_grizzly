@@ -2,7 +2,7 @@ import { type simplifiedProduct } from '../interface'
 import { client } from '../lib/sanity'
 import Image from '@/node_modules/next/image'
 import Link from '@/node_modules/next/link'
-async function getData (category: string) {
+async function getData (category: string): Promise<simplifiedProduct[]> {
   const query = `*[_type == 'product'  && category->name == "${category}"]  {
     _id,
       "imageUrl": images[0].asset->url,
@@ -15,7 +15,7 @@ async function getData (category: string) {
   return data
 }
 
-export default async function CategoryPage ({ params }: { params: { category: string } }) {
+export default async function CategoryPage ({ params }: { params: { category: string } }): Promise<JSX.Element> {
   const data: simplifiedProduct[] = await getData(params.category)
   return (
         <div className='bg-white'>

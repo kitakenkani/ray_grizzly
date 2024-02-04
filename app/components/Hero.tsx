@@ -2,13 +2,32 @@ import Image from '@/node_modules/next/image'
 import Link from '@/node_modules/next/link'
 import { client, urlFor } from '../lib/sanity'
 
-async function getData () {
+interface AssetReference {
+  _ref: string
+  _type: 'reference'
+}
+
+interface ImageInterface {
+  _type: 'image'
+  asset: AssetReference
+}
+
+interface DrawingImage {
+  _updatedAt: string
+  _createdAt: string
+  _rev: string
+  _type: 'drawingImages'
+  _id: string
+  image1: ImageInterface
+  image2: ImageInterface
+}
+async function getData (): Promise<DrawingImage> {
   const query = "*[_type == 'drawingImages'][0]"
   const data = await client.fetch(query)
   return data
 }
 
-export default async function Hero () {
+export default async function Hero (): Promise<JSX.Element> {
   const data = await getData()
   return (
         <section className="mx-auto max-w-2xl px-4 sm:pb-6 lg:max-w-7xl lg:px-8">
@@ -38,7 +57,7 @@ export default async function Hero () {
                     </div>
                     <div className=' overflow-hidden rounded-lg bg-gray-100 shadow-lg'>
                         <Image
-                            src={urlFor(data.imgae2).url()}
+                            src={urlFor(data.image2).url()}
                             alt="Great Photo"
                             className='h-full w-full object-cover object-center'
                             width={500}

@@ -7,7 +7,7 @@ import { urlFor } from '../lib/sanity'
 interface iAppProps {
   images: any
 }
-export default function ImageGallery ({ images }: iAppProps) {
+export default function ImageGallery ({ images }: iAppProps): JSX.Element {
   const [bigImage, setBigImage] = useState(images[0])
   const handleSmallImageClick = (image: any): void => {
     setBigImage(image)

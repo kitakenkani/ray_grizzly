@@ -13,7 +13,7 @@ const links = [
   { name: 'Goods', href: '/Goods' }
 ]
 
-export default function Navbar () {
+export default function Navbar (): JSX.Element {
   const pathname = usePathname()
   const { handleCartClick } = useShoppingCart()
   return (

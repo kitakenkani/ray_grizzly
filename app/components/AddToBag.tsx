@@ -13,7 +13,7 @@ export interface ProductCart {
   price_id: string
 }
 
-export default function AddToBag ({ currency, description, image, name, price, price_id }: ProductCart) {
+export default function AddToBag ({ currency, description, image, name, price, price_id }: ProductCart): JSX.Element {
   const { addItem, handleCartClick } = useShoppingCart()
   const product = {
     name,
@@ -26,9 +26,10 @@ export default function AddToBag ({ currency, description, image, name, price, p
 
   return (
         <Button
-            onClick={() => {
-              addItem(product), handleCartClick()
-            }}
+        onClick={() => {
+          addItem(product)
+          handleCartClick()
+        }}
         >
             Add To Cart
         </Button>

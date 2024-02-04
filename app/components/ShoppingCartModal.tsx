@@ -21,13 +21,13 @@ export default function ShoppingCartModal () {
     redirectToCheckout
   } = useShoppingCart()
 
-  async function handleCheckoutClick (event: any) {
+  async function handleCheckoutClick (event: any): Promise<void> {
     event.preventDefault()
     try {
       const result = await redirectToCheckout()
-      if (result?.error) {
-        console.log('result')
-        if (result.error) throw new Error(result.error)
+      if (result && 'error' in result && result.error) {
+        console.log('Checkout error:', result.error);
+        throw new Error(result.error);
       }
     } catch (e) {
       console.error(e)

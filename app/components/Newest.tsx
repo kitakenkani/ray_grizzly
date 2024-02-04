@@ -4,7 +4,7 @@ import Link from '@/node_modules/next/link'
 import { type simplifiedProduct } from '../interface'
 import { client } from '../lib/sanity'
 
-async function getData () {
+async function getData (): Promise<simplifiedProduct[]> {
   const query = `*[_type == 'product'][0...4] | order(_createdAt desc) {
         _id,
             price,
@@ -18,7 +18,7 @@ async function getData () {
   return data
 }
 
-export default async function Newest () {
+export default async function Newest (): Promise<JSX.Element> {
   const data: simplifiedProduct[] = await getData()
   return (
     <div className='bg-white'>
