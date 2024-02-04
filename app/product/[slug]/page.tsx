@@ -1,12 +1,11 @@
 import AddToBag from '@/app/components/AddToBag'
 import ImageGallery from '@/app/components/ImageGallery'
-import { fullProduct } from '@/app/interface'
+import { type fullProduct } from '@/app/interface'
 import { client } from '@/app/lib/sanity'
 import { Button } from '@/components/ui/button'
-import { Star } from '@/node_modules/lucide-react'
-import { Truck } from '@/node_modules/lucide-react'
+import { Star, Truck } from '@/node_modules/lucide-react'
 
-async function getData (slug: string) {
+async function getData (slug: string): Promise<fullProduct> {
   const query = `*[_type == 'product' && slug.current == "${slug}"][0]{
     _id,
       images,
@@ -21,7 +20,7 @@ async function getData (slug: string) {
   return data
 }
 
-export default async function ProductPage ({ params }: { params: { slug: string } }) {
+export default async function ProductPage ({ params }: { params: { slug: string } }): Promise<JSX.Element> {
   const decodedString = decodeURIComponent(params.slug)
   const data: fullProduct = await getData(decodedString)
   return (

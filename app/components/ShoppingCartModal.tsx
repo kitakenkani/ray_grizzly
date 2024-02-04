@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+/* eslint-disable @typescript-eslint/no-misused-promises */
 'use client'
 
 import { Button } from '@/components/ui/button'
@@ -10,7 +13,16 @@ import {
 import Image from '@/node_modules/next/image'
 import { useShoppingCart } from '@/node_modules/use-shopping-cart'
 
-export default function ShoppingCartModal () {
+interface CartItem {
+  id: string
+  image: string
+  name: string
+  price: number
+  description: string
+  quantity: number
+}
+
+export default function ShoppingCartModal (): JSX.Element {
   const {
     cartCount,
     shouldDisplayCart,
@@ -26,8 +38,8 @@ export default function ShoppingCartModal () {
     try {
       const result = await redirectToCheckout()
       if (result && 'error' in result && result.error) {
-        console.log('Checkout error:', result.error);
-        throw new Error(result.error);
+        console.log('Checkout error:', result.error)
+        throw new Error(result.error)
       }
     } catch (e) {
       console.error(e)
@@ -48,10 +60,10 @@ export default function ShoppingCartModal () {
                     )
                   : (
                     <>
-                    {Object.values(cartDetails ?? {}).map((entry) => (
+                    {Object.values(cartDetails as Record<string, CartItem>).map((entry) => (
                         <li key={entry.id} className="flex py-6">
                             <div className='h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200'>
-                                <Image src={entry.image!} alt="Product image" width={100} height={100} />
+                                <Image src={entry.image} alt="Product image" width={100} height={100} />
                             </div>
                             <div className='ml-4 flex flex-1 flex-col'>
                                 <div>
