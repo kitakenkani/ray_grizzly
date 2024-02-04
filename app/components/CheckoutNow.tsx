@@ -34,7 +34,7 @@ export default function CheckoutNow ({ currency, description, image, name, price
               buyNow(product.price_id)
             }}
         >
-            CheckoutNow
+            Checkout Now
         </Button>
   )
 }
