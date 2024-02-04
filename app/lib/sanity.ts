@@ -10,6 +10,8 @@ export const client = createClient({
 
 const builder = imageUrlBuilder(client)
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function urlFor (source: any) {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   return builder.image(source)
 }

@@ -21,16 +21,5 @@ module.exports = {
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    rules: {
-        // 既存のルールを上書きまたは追加
-        '@typescript-eslint/naming-convention': [
-          'error',
-          {
-            selector: 'variable',
-            format: ['camelCase', 'UPPER_CASE'], // 変数はcamelCaseまたはUPPER_CASEを使用
-          },
-          // 他のカスタマイズルール...
-        ],
-        // 他のルール設定...
-      },
+    rules: {},
 }
