@@ -27,7 +27,7 @@ export default async function ProductPage ({ params }: { params: { slug: string 
   const decodedString = decodeURIComponent(params.slug)
   const data: fullProduct = await getData(decodedString)
   return (
-    <div className='bg-white'>
+    <div className=''>
         <div className='mx-auto max-w-screen-xl px-4 md:px-8'>
             <div className='grid gap-8 md:grid-cols-2'>
                 <ImageGallery images={data.images}/>

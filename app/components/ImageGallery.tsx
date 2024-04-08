@@ -30,7 +30,7 @@ export default function ImageGallery ({ images }: iAppProps): JSX.Element {
             </div>
             <div className='relative overflow-hidden rounded-lg bg-gray-100 lg:col-span-4'>
                 <Image src={urlFor(bigImage).url()} alt="Photo" width={500} height={500} className="h-full w-full object-cover object-center" />
-                <span className='absolute left-0 top-0 rounded-br-lg bg-primary-foreground px-3 py-1.5 text-sm uppercase tracking-wider text-white'>
+                <span className='absolute left-0 top-0 rounded-br-lg bg-primary-foreground px-3 py-1.5 text-sm uppercase tracking-wider text-white bg-white bg-opacity-70'>
                     🧸
                 </span>
             </div>

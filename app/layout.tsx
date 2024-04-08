@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import CartProvider from './components/Providers'
 import ShoppingCartModal from './components/ShoppingCartModal'
 import './globals.css'
+import { ThemeProvider } from './components/theme-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,12 +24,19 @@ export default function RootLayout ({
       <Head>
         <link rel="icon" href="/ray_grizzly.svg" type="image/svg+xml"></link>
       </Head>
-      <body className={inter.className}>
-        <CartProvider>
-          <Navbar/>
-          <ShoppingCartModal />
-          {children}
-        </CartProvider>
+      <body className={`${inter.className}`}>
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+          <CartProvider>
+            <Navbar/>
+            <ShoppingCartModal />
+            {children}
+          </CartProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
