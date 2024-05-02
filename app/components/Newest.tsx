@@ -24,7 +24,7 @@ export default async function Newest (): Promise<JSX.Element> {
     <div className=''>
         <div className='"mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8'>
             <div className='flex justify-between items-center'>
-                <h2 className='text-2xl font-bold tracking-tight text-gray-900'>
+                <h2 className='text-2xl font-bold tracking-tight text-gray-900 dark:text-slate-50'>
                     Our Newest products
                 </h2>
                 <Link className='text-primary flex items-center gap-x-1' href="all">
@@ -48,16 +48,16 @@ export default async function Newest (): Promise<JSX.Element> {
                         </div>
                         <div className='mt-4 flex justify-between'>
                             <div>
-                                <h3 className='text-sm text-gray-700'>
+                                <h3 className='text-sm text-gray-700 dark:text-slate-300 '>
                                     <Link href={`/product/${product.slug}`}>
                                         {product.name}
                                     </Link>
                                 </h3>
-                                <p className='mt-1 text-sm text-gray-500'>
+                                <p className='mt-1 text-sm text-gray-500 dark:text-slate-50'>
                                   {product.categoryName}
                                 </p>
                             </div>
-                            <p className='text-sm font-medium text-gray-900'>¥{product.price}</p>
+                            <p className='text-sm font-medium text-gray-900 dark:text-slate-500'>¥{product.price}</p>
                         </div>
                     </div>
                 ))}

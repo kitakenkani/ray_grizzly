@@ -33,7 +33,7 @@ export default function Navbar (): JSX.Element {
                                 </Link>
                                 )
                               : (
-                                <Link className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-primary" href={link.href}>
+                                <Link className="text-lg font-semibold text-gray-600 dark:text-slate-50 transition duration-100 hover:text-primary" href={link.href}>
                                     {link.name}
                                 </Link>
                                 )}
@@ -49,7 +49,7 @@ export default function Navbar (): JSX.Element {
                             className="flex flex-col gap-y-1.5 h-12 w-12 sm:h-20 sm:w-20 md:h-24 md:w-24 rounded-none"
                         >
                             <ShoppingBag />
-                            <span className="hidden text-xs font-semibold text-gray-500 sm:block">
+                            <span className="hidden text-xs font-semibold text-gray-500 dark:text-slate-50 sm:block">
                                 Cart
                             </span>
                         </Button>

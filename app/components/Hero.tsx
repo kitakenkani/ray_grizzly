@@ -36,7 +36,7 @@ export default async function Hero (): Promise<JSX.Element> {
                     <h1 className="mb-4 text-4xl font-bold sm:text-5xl md:mb-8 md:text-6xl">
                     🧸Grizzly drawing ray
                     </h1>
-                    <p className="max-w-md leading-relaxed text-gray-500 xl:text-lg">
+                    <p className="max-w-md leading-relaxed text-gray-500 dark:text-slate-50 xl:text-lg">
                         kumagai 24. japan🇯🇵
                         I paint. I like shiny things and nature.
                         Please feel free to DM me for comments and advice 😁.
@@ -69,13 +69,13 @@ export default async function Hero (): Promise<JSX.Element> {
             </div>
             <div className='flex flex-col items-center justify-between gap-8 md:flex-row'>
                 <div className="flex h-12 w-64 divide-x overflow-hidden rounded-lg border">
-                    <Link href="/Drawing" className='flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200'>
+                    <Link href="/Drawing" className='flex w-1/3 items-center justify-center text-gray-500 dark:text-slate-50 transition duration-100 hover:bg-gray-100 active:bg-gray-200'>
                         Drawing
                     </Link>
-                    <Link href="/T-shirts" className='flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200'>
+                    <Link href="/T-shirts" className='flex w-1/3 items-center justify-center text-gray-500 dark:text-slate-50 transition duration-100 hover:bg-gray-100 active:bg-gray-200'>
                         T-shirts
                     </Link>
-                    <Link href="/Goods" className='flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200'>
+                    <Link href="/Goods" className='flex w-1/3 items-center justify-center text-gray-500 dark:text-slate-50 transition duration-100 hover:bg-gray-100 active:bg-gray-200'>
                         Goods
                     </Link>
                 </div>
