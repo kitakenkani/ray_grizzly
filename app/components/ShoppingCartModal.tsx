@@ -56,7 +56,7 @@ export default function ShoppingCartModal (): JSX.Element {
             <ul className='-my-6 divide-y divide-gray-200'>
                 {cartCount === 0
                   ? (
-                    <h1 className='py-6'>You dont hace any items</h1>
+                    <h1 className='py-6'>You dont have any items</h1>
                     )
                   : (
                     <>
