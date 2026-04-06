@@ -1,5 +1,5 @@
-import Image from '@/node_modules/next/image'
-import Link from '@/node_modules/next/link'
+import Image from 'next/image'
+import Link from 'next/link'
 import { client, urlFor } from '../lib/sanity'
 
 interface AssetReference {
@@ -21,13 +21,14 @@ interface DrawingImage {
   image1: ImageInterface
   image2: ImageInterface
 }
+
 async function getData (): Promise<DrawingImage> {
   const query = "*[_type == 'drawingImages'][0]"
   const data = await client.fetch(query)
   return data
 }
 
-export default async function Hero (): Promise<JSX.Element> {
+export default async function Hero () {
   const data = await getData()
   return (
         <section className="mx-auto max-w-2xl px-4 sm:pb-6 lg:max-w-7xl lg:px-8">

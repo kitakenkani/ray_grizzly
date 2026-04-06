@@ -2,9 +2,9 @@
 
 import { Button } from '@/components/ui/button'
 import { ShoppingBag } from 'lucide-react'
-import Link from '@/node_modules/next/link'
-import { usePathname } from '@/node_modules/next/navigation'
-import { useShoppingCart } from '@/node_modules/use-shopping-cart'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useShoppingCart } from 'use-shopping-cart'
 import { ModeToggle } from './ModeToggle'
 
 const links = [
@@ -14,7 +14,7 @@ const links = [
   { name: 'Goods', href: '/Goods' }
 ]
 
-export default function Navbar (): JSX.Element {
+export default function Navbar () {
   const pathname = usePathname()
   const { handleCartClick } = useShoppingCart()
   return (
@@ -39,7 +39,7 @@ export default function Navbar (): JSX.Element {
                                 )}
                         </div>
                     ))}
-                </nav>                
+                </nav>
                 <div className='flex justify-between items-center'>
                     <ModeToggle />
                     <div className="flex divide-x border-r sm:border-l">

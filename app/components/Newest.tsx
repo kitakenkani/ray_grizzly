@@ -1,28 +1,29 @@
-import Image from '@/node_modules/next/image'
+import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
-import Link from '@/node_modules/next/link'
-import { type simplifiedProduct } from '../interface'
+import Link from 'next/link'
+import { type SimplifiedProduct } from '../interface'
 import { client } from '../lib/sanity'
 
-async function getData (): Promise<simplifiedProduct[]> {
+async function getData (): Promise<SimplifiedProduct[]> {
   const query = `*[_type == 'product'][0...4] | order(_createdAt desc) {
         _id,
             price,
           name,
               "slug":  slug.current,
               "categoryName": category->name,
-              "imageUrl": images[0].asset->url
+              "imageUrl": images[0].asset->url,
+              available,
       }`
   const data = await client.fetch(query)
 
   return data
 }
 
-export default async function Newest (): Promise<JSX.Element> {
-  const data: simplifiedProduct[] = await getData()
+export default async function Newest () {
+  const data: SimplifiedProduct[] = await getData()
   return (
     <div className=''>
-        <div className='"mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8'>
+        <div className='mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8'>
             <div className='flex justify-between items-center'>
                 <h2 className='text-2xl font-bold tracking-tight text-gray-900 dark:text-slate-50'>
                     Our Newest products
@@ -37,7 +38,7 @@ export default async function Newest (): Promise<JSX.Element> {
             <div className='mt-5 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
                 {data.map((product) => (
                     <div key={product._id} className="group relative">
-                        <div className='aspect-square w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-80'>
+                        <div className='relative aspect-square w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-80'>
                             <Image
                                 src={product.imageUrl}
                                 alt="Product image"
@@ -45,6 +46,11 @@ export default async function Newest (): Promise<JSX.Element> {
                                 width={300}
                                 height={300}
                             />
+                            {!product.available && (
+                                <div className='absolute inset-0 flex items-center justify-center bg-black/40'>
+                                    <span className='rounded-md bg-white px-3 py-1 text-sm font-semibold text-gray-900'>Sold Out</span>
+                                </div>
+                            )}
                         </div>
                         <div className='mt-4 flex justify-between'>
                             <div>

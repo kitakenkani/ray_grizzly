@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-/* eslint-disable @typescript-eslint/no-misused-promises */
 'use client'
 
 import { Button } from '@/components/ui/button'
@@ -10,19 +7,10 @@ import {
   SheetHeader,
   SheetTitle
 } from '@/components/ui/sheet'
-import Image from '@/node_modules/next/image'
-import { useShoppingCart } from '@/node_modules/use-shopping-cart'
+import Image from 'next/image'
+import { useShoppingCart } from 'use-shopping-cart'
 
-interface CartItem {
-  id: string
-  image: string
-  name: string
-  price: number
-  description: string
-  quantity: number
-}
-
-export default function ShoppingCartModal (): JSX.Element {
+export default function ShoppingCartModal () {
   const {
     cartCount,
     shouldDisplayCart,
@@ -30,21 +18,35 @@ export default function ShoppingCartModal (): JSX.Element {
     cartDetails,
     removeItem,
     totalPrice,
-    redirectToCheckout
+    clearCart,
   } = useShoppingCart()
 
-  async function handleCheckoutClick (event: any): Promise<void> {
+  async function handleCheckoutClick (event: React.MouseEvent<HTMLButtonElement>): Promise<void> {
     event.preventDefault()
     try {
-      const result = await redirectToCheckout()
-      if (result && 'error' in result && result.error) {
-        console.log('Checkout error:', result.error)
-        throw new Error(result.error)
+      const items = Object.values(cartDetails ?? {}).map((entry) => ({
+        price: (entry as Record<string, unknown>).price_id as string,
+        quantity: entry.quantity,
+      }))
+
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items }),
+      })
+      const data = await res.json() as { url?: string; error?: string }
+
+      if (data.url != null) {
+        clearCart()
+        window.location.href = data.url
+      } else {
+        console.error('Checkout error:', data.error)
       }
     } catch (e) {
       console.error(e)
     }
   }
+
   return (
    <Sheet open={shouldDisplayCart} onOpenChange={() => { handleCartClick() }}>
     <SheetContent className="sm:mx-w-lg w-[90vw]">
@@ -60,10 +62,10 @@ export default function ShoppingCartModal (): JSX.Element {
                     )
                   : (
                     <>
-                    {Object.values(cartDetails as Record<string, CartItem>).map((entry) => (
+                    {Object.values(cartDetails ?? {}).map((entry) => (
                         <li key={entry.id} className="flex py-6">
                             <div className='h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200'>
-                                <Image src={entry.image} alt="Product image" width={100} height={100} />
+                                <Image src={entry.image as string} alt="Product image" width={100} height={100} />
                             </div>
                             <div className='ml-4 flex flex-1 flex-col'>
                                 <div>
@@ -95,7 +97,7 @@ export default function ShoppingCartModal (): JSX.Element {
             </div>
             <p className='mt-0.5 text-sm text-gray-500'>Shipping and taxes are calculated at checkout.</p>
             <div className='mt-6'>
-                <Button onClick={handleCheckoutClick} className='w-full'>Checkout</Button>
+                <Button onClick={(e) => { void handleCheckoutClick(e) }} className='w-full'>Checkout</Button>
             </div>
             <div className='mt-6 flex justify-center text-center text-sm text-gray-500 '>
                 <p>

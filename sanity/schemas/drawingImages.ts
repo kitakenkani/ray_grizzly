@@ -11,7 +11,7 @@ export default {
         {
             name: 'image2',
             type: 'image',
-            titile: 'Second Image',
+            title: 'Second Image',
         },
     ],
 }

@@ -1,17 +1,26 @@
-import imageUrlBuilder from '@sanity/image-url'
+import { createImageUrlBuilder } from '@sanity/image-url'
 import { createClient } from 'next-sanity'
+import { type SanityImage } from '../interface'
 
-export const client = createClient({
+const config = {
   projectId: 'q9lmlrdg',
   dataset: 'production',
   apiVersion: '2023-01-06',
-  useCdn: true
+}
+
+export const client = createClient({
+  ...config,
+  useCdn: true,
 })
 
-const builder = imageUrlBuilder(client)
+export const writeClient = createClient({
+  ...config,
+  useCdn: false,
+  token: process.env.SANITY_API_TOKEN,
+})
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function urlFor (source: any) {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+const builder = createImageUrlBuilder(client)
+
+export function urlFor (source: SanityImage) {
   return builder.image(source)
 }

@@ -1,20 +1,20 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { useShoppingCart } from '@/node_modules/use-shopping-cart'
+import { useShoppingCart } from 'use-shopping-cart'
 import { urlFor } from '../lib/sanity'
+import { type SanityImage } from '../interface'
 
 export interface ProductCart {
   name: string
   description: string
   price: number
   currency: string
-  image: any
+  image: SanityImage
   price_id: string
 }
 
-export default function AddToBag ({ currency, description, image, name, price, price_id }: ProductCart): JSX.Element {
+export default function AddToBag ({ currency, description, image, name, price, price_id }: ProductCart) {
   const { addItem, handleCartClick } = useShoppingCart()
   const product = {
     name,
